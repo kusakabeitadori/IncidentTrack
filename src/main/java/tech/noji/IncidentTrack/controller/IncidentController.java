@@ -69,6 +69,7 @@
 
 package tech.noji.IncidentTrack.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.noji.IncidentTrack.dto.*;
@@ -102,8 +103,15 @@ public class IncidentController {
         return ResponseEntity.ok(incidentService.getIncidentById(id));
     }
 
+//    @PutMapping("/{id}")
+//    public ResponseEntity<IncidentDto> updateIncident(@PathVariable Long id, @RequestBody UpdateIncidentRequest request) {
+//        return ResponseEntity.ok(incidentService.updateIncident(id, request));
+//    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<IncidentDto> updateIncident(@PathVariable Long id, @RequestBody UpdateIncidentRequest request) {
+    public ResponseEntity<IncidentDto> updateIncident(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateIncidentRequest request) {
         return ResponseEntity.ok(incidentService.updateIncident(id, request));
     }
 
@@ -112,10 +120,16 @@ public class IncidentController {
         return ResponseEntity.ok(incidentService.reassignIncident(id, request.get("utilisateurAssigneId")));
     }
 
-    @PutMapping("/{id}/status")
-    public ResponseEntity<IncidentDto> updateStatus(@PathVariable Long id, @RequestBody Map<String, String> statutUpdate) {
-        return ResponseEntity.ok(incidentService.changeStatus(id, statutUpdate.get("statut")));
-    }
+//    @PutMapping("/{id}/status")
+//    public ResponseEntity<IncidentDto> updateStatus(@PathVariable Long id, @RequestBody Map<String, String> statutUpdate) {
+//        return ResponseEntity.ok(incidentService.changeStatus(id, statutUpdate.get("statut")));
+//    }
+@PutMapping("/{id}/status")
+public ResponseEntity<IncidentDto> updateStatus(
+        @PathVariable Long id,
+        @Valid @RequestBody UpdateStatusRequest request) {
+    return ResponseEntity.ok(incidentService.changeStatus(id, request.getStatut()));
+}
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteIncident(@PathVariable Long id) {

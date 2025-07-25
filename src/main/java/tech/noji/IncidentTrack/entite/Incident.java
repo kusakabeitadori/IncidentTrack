@@ -73,6 +73,7 @@ public class Incident {
 
     @Enumerated(EnumType.STRING)
     private Status status = Status.OUVERT;
+//    private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "createur_incident_id", nullable = false)
@@ -84,4 +85,9 @@ public class Incident {
 
     @Column(nullable = false)
     private LocalDateTime creationDate = LocalDateTime.now();
+    public static Incident createReference(Long id) {
+        Incident incident = new Incident();
+        incident.setId(id);
+        return incident;
+    }
 }

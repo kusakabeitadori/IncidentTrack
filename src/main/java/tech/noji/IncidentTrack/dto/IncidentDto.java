@@ -1,6 +1,4 @@
 package tech.noji.IncidentTrack.dto;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
