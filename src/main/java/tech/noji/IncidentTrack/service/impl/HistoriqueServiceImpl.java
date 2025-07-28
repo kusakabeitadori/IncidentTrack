@@ -10,6 +10,7 @@ import tech.noji.IncidentTrack.dto.HistoriqueIncidentDto;
 import tech.noji.IncidentTrack.entite.HistoriqueIncident;
 import tech.noji.IncidentTrack.exception.ResourceNotFoundException;
 import tech.noji.IncidentTrack.mapper.HistoriqueMapper;
+import tech.noji.IncidentTrack.mapper.UtilisateurMapper;
 import tech.noji.IncidentTrack.repository.HistoriqueIncidentRepository;
 import tech.noji.IncidentTrack.repository.IncidentRepository;
 import tech.noji.IncidentTrack.repository.UtilisateurRepository;
@@ -24,6 +25,7 @@ public class HistoriqueServiceImpl implements HistoriqueService {
     private final IncidentRepository incidentRepository;
     private final UtilisateurRepository utilisateurRepository;
     private final HistoriqueMapper historiqueMapper;
+    private final AuthService authService;
 
     @Override
     @Transactional
@@ -37,7 +39,16 @@ public class HistoriqueServiceImpl implements HistoriqueService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    public void save(Long incidentId, String action, String details) {
+            HistoriqueIncident historique = new HistoriqueIncident();
+            historique.setIncident(incidentRepository.getReferenceById(incidentId));
+            historique.setAction(action);
+            historique.setUtilisateur(authService.getCurrentUser());
+            historique.setDetails(details);
+            historiqueRepository.save(historique);
+    }
+
+    @Override
     public List<HistoriqueIncidentDto> getHistoriqueIncident(Long incidentId) {
         return historiqueRepository.findByIncidentIdOrderByDateActionDesc(incidentId)
                 .stream()
@@ -45,16 +56,8 @@ public class HistoriqueServiceImpl implements HistoriqueService {
                 .toList();
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public Page<HistoriqueIncidentDto> getAllHistorique(int page, int size) {
-        PageRequest pageable = PageRequest.of(page, size, Sort.by("dateAction").descending());
-        return historiqueRepository.findAll(pageable)
-                .map(historiqueMapper::toDto);
-    }
 
     @Override
-    @Transactional(readOnly = true)
     public HistoriqueIncidentDto getHistoriqueEntry(Long id) {
         return historiqueRepository.findById(id)
                 .map(historiqueMapper::toDto)

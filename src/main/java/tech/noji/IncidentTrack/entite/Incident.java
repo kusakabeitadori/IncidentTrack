@@ -47,6 +47,8 @@ package tech.noji.IncidentTrack.entite;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -56,12 +58,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "incidents")
 public class Incident {
-    public enum Status {
-        OUVERT,
-        ENCOURS,
-        RESOLU,
-        FERME
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,8 +68,7 @@ public class Incident {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private Status status = Status.OUVERT;
-//    private Status status;
+    private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "createur_incident_id", nullable = false)
@@ -84,10 +79,11 @@ public class Incident {
     private Utilisateur utilisateurAssigne;
 
     @Column(nullable = false)
-    private LocalDateTime creationDate = LocalDateTime.now();
-    public static Incident createReference(Long id) {
-        Incident incident = new Incident();
-        incident.setId(id);
-        return incident;
+    private LocalDateTime creationDate;
+
+    @PrePersist
+    public void prePersist(){
+        status = Status.OUVERT;
+        creationDate = LocalDateTime.now();
     }
 }

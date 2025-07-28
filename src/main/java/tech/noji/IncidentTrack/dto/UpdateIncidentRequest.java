@@ -13,6 +13,4 @@ public class UpdateIncidentRequest {
         private String titre;
         private String description;
         private Long utilisateurAssigneId;
-       private Incident.Status status;
-
 }

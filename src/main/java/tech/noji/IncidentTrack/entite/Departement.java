@@ -8,12 +8,11 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "services") // "service" est un mot réservé en SQL
-public class ServiceEntity {
+@Table(name = "departements")
+public class Departement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(unique = true)
     private String name;
 }

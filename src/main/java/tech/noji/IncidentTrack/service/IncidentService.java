@@ -8,8 +8,9 @@ public interface IncidentService {
     IncidentDto updateIncident(Long id, UpdateIncidentRequest request);
     IncidentDto reassignIncident(Long incidentId, Long newAgentId);
     void deleteIncident(Long id);
-    IncidentDto changeStatus(Long incidentId, String newStatus);
+    IncidentDto changeStatus(Long incidentId, String newStatus,String details);
     List<IncidentDto> getAllIncidents();
     IncidentDto getIncidentById(Long incidentId);
     List<IncidentDto> getIncidentsByAgent(Long agentId);
+    List<IncidentDto> getIncidentsByUserConnected();
 }

@@ -14,12 +14,6 @@ import java.util.List;
 public class HistoriqueController {
     private final HistoriqueService historiqueService;
 
-    @GetMapping
-    public ResponseEntity<Page<HistoriqueIncidentDto>> getAllHistorique(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        return ResponseEntity.ok(historiqueService.getAllHistorique(page, size));
-    }
 
     @GetMapping("/incident/{incidentId}")
     public ResponseEntity<List<HistoriqueIncidentDto>> getHistoriqueByIncident(

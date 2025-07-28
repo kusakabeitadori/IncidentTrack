@@ -17,11 +17,14 @@ public class IncidentDto {
     private  String titre;
     private  String description;
     private  String status;
-    private Long utilisateurAssigneId;
-    private  String utilisateurAssigneNom;
-    private  String utilisateurAssigneServiceNom;
+    private LocalDateTime creationDate;
     private Long createurIncidentId;
     private String createurIncidentNom;
-    private LocalDateTime creationDate;
-
+    private String createurIncidentEmail;
+    private Long createurIncidentServiceId;
+    private String createurIncidentServiceName;
+    private Long utilisateurAssigneId;
+    private String utilisateurAssigneNom;
+    private Long utilisateurAssigneServiceId;
+    private String utilisateurAssigneServiceName;
 }

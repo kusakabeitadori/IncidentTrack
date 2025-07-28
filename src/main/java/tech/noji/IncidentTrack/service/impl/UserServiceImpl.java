@@ -1,24 +1,26 @@
 package tech.noji.IncidentTrack.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import tech.noji.IncidentTrack.dto.*;
 import tech.noji.IncidentTrack.entite.*;
 import tech.noji.IncidentTrack.exception.ResourceNotFoundException;
 import tech.noji.IncidentTrack.mapper.UtilisateurMapper;
 import tech.noji.IncidentTrack.repository.*;
-import tech.noji.IncidentTrack.service.AdminService;
+import tech.noji.IncidentTrack.service.UserService;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class AdminServiceImpl implements AdminService {
+public class UserServiceImpl implements UserService {
 
     private final UtilisateurRepository utilisateurRepository;
     private final RoleRepository roleRepository;
-    private final ServiceRepository serviceRepository;
+    private final DepartementRepository serviceRepository;
     private final UtilisateurMapper utilisateurMapper;
 
     @Override
@@ -30,7 +32,7 @@ public class AdminServiceImpl implements AdminService {
         utilisateur.setRole(role);
 
         if (requestDto.getServiceId() != null) {
-            ServiceEntity service = serviceRepository.findById(requestDto.getServiceId())
+            Departement service = serviceRepository.findById(requestDto.getServiceId())
                     .orElseThrow(() -> new ResourceNotFoundException("Service non trouvé"));
             utilisateur.setService(service);
         }
@@ -78,7 +80,7 @@ public class AdminServiceImpl implements AdminService {
         Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
                 .orElseThrow(() -> new ResourceNotFoundException("Utilisateur non trouvé"));
 
-        ServiceEntity service = serviceRepository.findById(serviceId)
+        Departement service = serviceRepository.findById(serviceId)
                 .orElseThrow(() -> new ResourceNotFoundException("Service non trouvé"));
 
         utilisateur.setService(service);
@@ -100,7 +102,7 @@ public class AdminServiceImpl implements AdminService {
         }
 
         if (requestDto.getServiceId() != null) {
-            ServiceEntity service = serviceRepository.findById(requestDto.getServiceId())
+            Departement service = serviceRepository.findById(requestDto.getServiceId())
                     .orElseThrow(() -> new ResourceNotFoundException("Service non trouvé"));
             utilisateur.setService(service);
         }
@@ -108,4 +110,5 @@ public class AdminServiceImpl implements AdminService {
         Utilisateur updatedUser = utilisateurRepository.save(utilisateur);
         return utilisateurMapper.toDto(updatedUser);
     }
+
 }

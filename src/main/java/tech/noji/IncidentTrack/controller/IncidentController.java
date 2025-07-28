@@ -103,11 +103,6 @@ public class IncidentController {
         return ResponseEntity.ok(incidentService.getIncidentById(id));
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<IncidentDto> updateIncident(@PathVariable Long id, @RequestBody UpdateIncidentRequest request) {
-//        return ResponseEntity.ok(incidentService.updateIncident(id, request));
-//    }
-
     @PutMapping("/{id}")
     public ResponseEntity<IncidentDto> updateIncident(
             @PathVariable Long id,
@@ -120,16 +115,13 @@ public class IncidentController {
         return ResponseEntity.ok(incidentService.reassignIncident(id, request.get("utilisateurAssigneId")));
     }
 
-//    @PutMapping("/{id}/status")
-//    public ResponseEntity<IncidentDto> updateStatus(@PathVariable Long id, @RequestBody Map<String, String> statutUpdate) {
-//        return ResponseEntity.ok(incidentService.changeStatus(id, statutUpdate.get("statut")));
-//    }
-@PutMapping("/{id}/status")
-public ResponseEntity<IncidentDto> updateStatus(
-        @PathVariable Long id,
-        @Valid @RequestBody UpdateStatusRequest request) {
-    return ResponseEntity.ok(incidentService.changeStatus(id, request.getStatut()));
-}
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<IncidentDto> updateStatus(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateStatusRequest request) {
+        return ResponseEntity.ok(incidentService.changeStatus(id, request.getStatut(), request.getDetails()));
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteIncident(@PathVariable Long id) {

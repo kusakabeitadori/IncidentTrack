@@ -4,38 +4,38 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.noji.IncidentTrack.dto.CreationUtilisateurRequestDto;
 import tech.noji.IncidentTrack.dto.UtilisateurDto;
-import tech.noji.IncidentTrack.service.AdminService;
+import tech.noji.IncidentTrack.service.UserService;
 //import tech.noji.IncidentTrack.service.impl.AdminServiceImpl;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api/users")
 @RequiredArgsConstructor
-public class AdminController {
-    private final AdminService adminService;
+public class UserController {
+    private final UserService adminService;
 
-    @PostMapping("/users")
+    @PostMapping("/")
     public ResponseEntity<UtilisateurDto> createUser(@RequestBody CreationUtilisateurRequestDto requestDto) {
         return ResponseEntity.ok(adminService.createUser(requestDto));
     }
 
-    @GetMapping("/users")
+    @GetMapping("/")
     public ResponseEntity<List<UtilisateurDto>> getAllUsers() {
         return ResponseEntity.ok(adminService.getAllUsers());
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UtilisateurDto> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok(adminService.getUserById(id));
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<UtilisateurDto> updateUser(@PathVariable Long id,
                                                      @RequestBody CreationUtilisateurRequestDto requestDto) {
         return ResponseEntity.ok(adminService.updateUser(id, requestDto));
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         adminService.deleteUser(id);
         return ResponseEntity.noContent().build();

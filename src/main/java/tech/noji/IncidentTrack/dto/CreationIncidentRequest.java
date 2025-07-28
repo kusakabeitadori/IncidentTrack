@@ -13,6 +13,4 @@ public class CreationIncidentRequest {
     private String description;
     private Long utilisateurAssigneId;
     private Long createurIncidentId;
-
-
 }

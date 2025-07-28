@@ -9,5 +9,7 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
     Optional<Utilisateur> findByEmail(String email);
     List<Utilisateur> findByServiceId(Long serviceId);
     List<Utilisateur> findByRoleId(Long roleId);
+
+    boolean existsByEmail(String mail);
 //    List<Utilisateur> findByIncidentsAssignesIsNotEmpty();
 }

@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface HistoriqueIncidentRepository extends JpaRepository<HistoriqueIncident, Long> {
     List<HistoriqueIncident> findByIncidentIdOrderByDateActionDesc(Long incidentId);
+    List<HistoriqueIncident> findAllByIncidentId(Long incidentId);
     Page<HistoriqueIncident> findAll(Pageable pageable);
 }

@@ -11,6 +11,4 @@ public interface IncidentService {
     List<IncidentDto> getAllIncidents();
     IncidentDto getIncidentById(Long incidentId);
     List<IncidentDto> getIncidentsByAgent(Long agentId);
-    List<AgentWithIncidentsDto> getAgentsWithIncidents();
-    AgentWithIncidentsDto getAgentWithIncidents(Long agentId);
 }

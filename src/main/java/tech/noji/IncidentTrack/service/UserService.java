@@ -3,7 +3,7 @@ package tech.noji.IncidentTrack.service;
 import tech.noji.IncidentTrack.dto.*;
 import java.util.List;
 
-public interface AdminService {
+public interface UserService {
     UtilisateurDto createUser(CreationUtilisateurRequestDto requestDto);
     List<UtilisateurDto> getAllUsers();
     UtilisateurDto getUserById(Long id);

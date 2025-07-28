@@ -4,4 +4,5 @@ import lombok.Data;
 @Data
 public class UpdateStatusRequest {
     private String statut;
+    private String details;
 }

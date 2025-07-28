@@ -14,10 +14,9 @@ public class UtilisateurDto {
     private  Long id;
     private String nom;
     private String email;
+    private boolean actif;
+    private Long roleId;
+    private String roleName;
     private Long serviceId;
-    private  String serviceNom;
-    private  Long roleId;
-    private String roleNom;
-
-
+    private String serviceName;
 }
