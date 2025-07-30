@@ -14,6 +14,7 @@ public class ModelMapperConfig {
 
         modelMapper.getConfiguration()
                 .setSkipNullEnabled(true);
+        modelMapper.getConfiguration().setAmbiguityIgnored(true);
         return modelMapper;
     }
 }

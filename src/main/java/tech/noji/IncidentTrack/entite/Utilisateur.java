@@ -7,6 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "utilisateurs")
 public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,15 +17,15 @@ public class Utilisateur {
     @Column(unique = true)
     private String email;
 
-    private String motDePasse;
+    private String password;
 
     private boolean actif = true;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "service_id")
     private Departement service;
 

@@ -51,7 +51,6 @@ public class UserController {
         return ResponseEntity.ok("Rôle attribué avec succès à l'utilisateur.");
     }
 
-
     @PutMapping("/{utilisateurId}/service/{serviceId}")
     public ResponseEntity<String> attribuerService(
             @PathVariable Long utilisateurId,
@@ -59,6 +58,4 @@ public class UserController {
         adminService.attribuerService(utilisateurId, serviceId);
         return ResponseEntity.ok("Service attribué avec succès à l'utilisateur.");
     }
-
-
 }

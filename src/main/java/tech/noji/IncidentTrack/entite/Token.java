@@ -11,14 +11,15 @@ import lombok.*;
 @Builder
 @Table(name = "tokens")
 public class Token {
-
     @Id
-    @Column(columnDefinition = "text",unique=true)
+    @Column(unique=true)
     private String value;
+
     private boolean expired;
     private boolean revoked;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "utilisateur_id")
     private Utilisateur utilisateur;
 }
 

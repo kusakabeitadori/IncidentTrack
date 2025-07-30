@@ -42,7 +42,7 @@ public class DataInitializer implements CommandLineRunner {
             Utilisateur admin = new Utilisateur();
             admin.setNom("Administrateur");
             admin.setEmail("admin@example.com");
-            admin.setMotDePasse(passwordEncoder
+            admin.setPassword(passwordEncoder
                     .encode("admin123"));
             admin.setActif(true);
             admin.setRole(adminRole);
@@ -53,7 +53,7 @@ public class DataInitializer implements CommandLineRunner {
             Utilisateur admin = new Utilisateur();
             admin.setNom("RECEPTIONISTE");
             admin.setEmail("receptioniste@example.com");
-            admin.setMotDePasse(passwordEncoder
+            admin.setPassword(passwordEncoder
                     .encode("receptioniste123"));
             admin.setActif(true);
             admin.setRole(receptionisteRole);
